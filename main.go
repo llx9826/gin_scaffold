@@ -8,8 +8,11 @@ import (
 	"syscall"
 )
 
-func main()  {
-	lib.InitModule("./conf/dev/",[]string{"base","mysql","redis"})
+func main() {
+	err := lib.InitModule("./conf/dev/", []string{"base", "mysql", "redis"})
+	if err != nil {
+		return
+	}
 	defer lib.Destroy()
 	router.HttpServerRun()
 
